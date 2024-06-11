@@ -10,13 +10,17 @@ HardwareSerial neogps(2);
 TinyGPSPlus gps;
 
 //MQTT
-const char* ssid = "wifi_camera"; //da vedere
-const char* password = "zxhjkyw2."; //da vedere
+const char* ssid = "Redmi Note 9S"; //da vedere
+const char* password = "casa1234"; //da vedere
 
 //broker conf MQTT
 const char* topic = "GpsInfo/P1";
-const char* mqtt_server = "192.168.1.14"; //da vedere
+const char* mqtt_server = "192.168.62.173"; //da vedere
 const int mqtt_port = 1883;
+
+//button
+const int button = 2;
+int buttonState = 0;
 
 WiFiClient espClient;
 PubSubClient client(espClient);
@@ -56,6 +60,7 @@ void reconnect() {
 }
 
 void  setup(){
+  pinMode(button, INPUT);
   Serial.begin(115200);
   neogps.begin(9600, SERIAL_8N1, RXP, TXP);
   //Wifi connection
@@ -88,6 +93,7 @@ void  setup(){
 void loop(){
   boolean newData = false;
   client.loop();
+  buttonState = digitalRead(button);
 
   for(unsigned long start = millis(); millis() - start <1000;){
     while(neogps.available()){
@@ -97,17 +103,24 @@ void loop(){
     }
   }
 
-  if(newData == true){
+  if(newData == true && buttonState == HIGH){
+    digitalWrite(19, LOW);
     newData = false;
     Serial.println(gps.satellites.value());
     Serial.println("Current position: " + String(gps.location.lat(), 6) + ", " + String(gps.location.lng(), 6));
     Serial.println("Distance: " + String(gps.distanceBetween(gps.location.lat(), gps.location.lng(), 0, 0)));
     Serial.println("Altitude: " + String(gps.altitude.meters()));
     Serial.println("Failed Checksum: " + String(gps.failedChecksum()));
-    String str = String(gps.location.lat());
+    //MQTT publishing
+    String str = "";
+    str = String(gps.location.lat(), 6) + " " + String(gps.location.lng(), 6);
     int str_len = str.length() + 1;
     char array[str_len];
     str.toCharArray(array, str_len);
     boolean rc = client.publish(topic, array);
+  }
+  else if(buttonState == LOW)
+  {
+    digitalWrite(19, HIGH);
   }
 }
