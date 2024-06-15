@@ -46,17 +46,23 @@ printf("MQTT connected\n");
 
 $mqtt->subscribe('GpsInfo/P1', function ($topic, $message) use ($conn) {
     printf("\n\n\nReceived message on topic [%s]: %s\n", $topic, $message);
-    $data = json_decode($message);
+    //$data = json_decode($message);
+    $data = $message;
 
-    printf("device_id: %s\n", $data->device_id);
-    printf("type: %s\n", $data->type);
-    printf("value: %s\n", $data->value);
+    $pieces = explode(" ", $data);
+    //echo $pieces[0];
+    //echo " ";
+    //echo $pieces[1];
 
-    $device_id = $data->device_id;
-    $type = $data->type;
-    $value = $data->value;
+    //printf("device_id: %s\n", $data->device_id);
+    //printf("type: %s\n", $data->type);
+    //printf("value: %s\n", $data->value);
 
-    $query = "INSERT INTO position (device_id, lat, lg) VALUES ($device_id, '$type','$value');";
+    //$device_id = $data->device_id;
+    //$type = $data->type;
+    //$value = $data->value;
+
+    $query = "INSERT INTO position (lat, lg) VALUES ('$pieces[0]','$pieces[1]');";
     mysqli_query($conn, $query);
     printf("Data Stored Successfully :)");
 }, 0);
