@@ -1,0 +1,135 @@
+body{
+    justify-content: center;
+    align-items: center;
+    font-family:Arial;
+    font-size: 20px;
+    text-align: center;
+    background-color:rgb(232, 10, 99);
+}
+
+button{
+    height: 50px;
+    border: none;
+    border-radius: 25px;
+    width: fit-content;
+    font-size: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: aliceblue;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+.container{
+    display: flex;
+    min-height: 45vh;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+
+h1{
+    font-size: 60px;
+    color: ghostwhite;
+    
+}
+
+h2{
+    font-size: 40px;
+    color: ghostwhite;
+}
+
+h3{
+    font-size: 20px;
+    color: ghostwhite;
+}
+
+h4{
+    font-size: 5px;
+    color: ghostwhite;
+}
+
+
+input{
+    height: 50px;
+    border: none;
+    border-radius: 25px;
+    width: 150px;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: aliceblue;
+}
+
+a{
+    font-size: 20px;
+    color: aliceblue;
+}
+
+a:hover{
+    font-size: 20px;
+    color: hotpink;
+}
+
+error{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    border: none;
+    border-radius: 25px;
+    width: 150px;
+    font-size: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: aliceblue;
+    margin-left: auto;
+    margin-right: auto;
+    color: red;
+}
+
+select{
+    height: 50px;
+    border: none;
+    border-radius: 25px;
+    width: 150px;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: aliceblue;
+}
+
+table, th, td{
+    border: 1px solid white;
+    padding: 4px;
+    text-align: center;
+}
+
+.center{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+th{
+    background-color:rgb(147, 80, 214);
+}
+
+tr{
+    background-color: white;
+}
+
+tr:hover{
+    background-color: blueviolet;
+}
+
+label{
+    background-color: white;
+    border: none;
+    border-radius: 70px;
+    font-size: 20px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
